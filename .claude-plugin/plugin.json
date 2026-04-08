@@ -1,0 +1,12 @@
+{
+  "name": "chat-timestamps",
+  "description": "See when every message was sent — display timestamps from your Claude Code chat history",
+  "version": "1.0.0",
+  "author": {
+    "name": "s-a-s-k-i-a",
+    "url": "https://github.com/s-a-s-k-i-a"
+  },
+  "repository": "https://github.com/s-a-s-k-i-a/claude-code-timestamps",
+  "license": "MIT",
+  "keywords": ["timestamps", "chat-history", "transcript", "time"]
+}
