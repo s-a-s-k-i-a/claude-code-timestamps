@@ -78,6 +78,9 @@ This plugin was built in response to these open feature requests on the Claude C
 
 If native timestamp support lands in Claude Code, this plugin will no longer be needed — and that's a good thing!
 
+Pro Tip:
+Missing timestamps in Claude Desktop App? As claude to build use a hook to display your local timestamp at the beginning of every reply! Works like. charm!
+
 ## License
 
 MIT
