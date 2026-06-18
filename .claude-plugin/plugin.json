@@ -1,7 +1,7 @@
 {
   "name": "chat-timestamps",
   "description": "See when every message was sent — a timestamped session timeline with day dividers and idle-gap markers, plus optional time-awareness for Claude. All local.",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": {
     "name": "s-a-s-k-i-a",
     "url": "https://github.com/s-a-s-k-i-a"

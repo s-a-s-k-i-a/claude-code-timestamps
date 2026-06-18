@@ -112,6 +112,29 @@ untouched):
 This is the **only** feature that uses tokens, so it's **off by default**.
 Remove the variable (or set `=off`) to disable it again.
 
+### Zero-token timeline (run it in your own terminal)
+
+`/timestamps` is a slash command, so it goes through the model and costs a small
+amount of (Haiku) tokens. If you want the timeline with **no tokens at all**,
+run the parser directly from your shell — it finds the right transcript itself:
+
+```bash
+python3 ~/.claude/plugins/chat-timestamps/scripts/parse-transcript.py --cwd "$PWD" 50
+```
+
+Or use the bundled helper (auto-detects the Python launcher):
+
+```bash
+bash ~/.claude/plugins/chat-timestamps/scripts/timeline.sh 50 --seconds
+# handy alias:
+alias cct='bash ~/.claude/plugins/chat-timestamps/scripts/timeline.sh'
+```
+
+No agent is involved, so it's instant and free. Adjust the path to wherever the
+plugin lives (manual installs: `~/.claude/plugins/chat-timestamps`; marketplace
+installs sit under `~/.claude/plugins/` — find it via `/plugin`). *(Idea via
+[#8](https://github.com/s-a-s-k-i-a/claude-code-timestamps/issues/8).)*
+
 ## Token cost & privacy
 
 Free and private by default — you opt in to the one feature that isn't.
