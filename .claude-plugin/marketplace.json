@@ -1,0 +1,14 @@
+{
+  "name": "chat-timestamps",
+  "owner": {
+    "name": "s-a-s-k-i-a",
+    "url": "https://github.com/s-a-s-k-i-a"
+  },
+  "plugins": [
+    {
+      "name": "chat-timestamps",
+      "source": "./",
+      "description": "Timestamped timeline of your Claude Code session — day dividers, idle-gap markers, and optional time-awareness for Claude. Everything stays local."
+    }
+  ]
+}
