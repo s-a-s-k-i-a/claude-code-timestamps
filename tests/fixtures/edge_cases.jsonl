@@ -1,0 +1,10 @@
+{"type":"user","timestamp":"2026-06-16T08:00:00Z","cwd":"/work/demo","message":{"role":"user","content":"plain string prompt"}}
+{"type":"assistant","timestamp":"2026-06-16T08:00:05Z","cwd":"/work/demo","message":{"role":"assistant","content":[{"type":"thinking","thinking":"private reasoning"},{"type":"text","text":"text after thinking"}]}}
+{"type":"assistant","timestamp":"2026-06-16T08:00:10Z","cwd":"/work/demo","message":{"role":"assistant","content":[{"type":"tool_use","name":"Read"}]}}
+{"type":"user","timestamp":"2026-06-16T08:00:15Z","cwd":"/work/demo","message":{"role":"user","content":[{"type":"tool_result","content":"file contents here"}]}}
+{"type":"assistant","timestamp":"2026-06-16T08:00:20Z","cwd":"/work/demo","isSidechain":true,"message":{"role":"assistant","content":[{"type":"text","text":"subagent internal text"}]}}
+{"type":"attachment","timestamp":"2026-06-16T08:00:25Z","attachment":{"path":"img.png"}}
+{"type":"ai-title","timestamp":"2026-06-16T08:00:26Z","aiTitle":"Some session title"}
+{"type":"assistant","cwd":"/work/demo","message":{"role":"assistant","content":[{"type":"text","text":"entry with no timestamp"}]}}
+this line is not valid json and must be skipped
+{"type":"user","timestamp":"2026-06-16T08:00:30Z","cwd":"/work/demo","message":{"role":"user","content":"    "}}

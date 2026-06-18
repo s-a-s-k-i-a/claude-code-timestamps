@@ -1,0 +1,6 @@
+{"type":"user","timestamp":"2026-06-17T09:00:00Z","cwd":"/work/sameday","message":{"role":"user","content":"can you refactor the auth middleware?"}}
+{"type":"assistant","timestamp":"2026-06-17T09:00:30Z","cwd":"/work/sameday","message":{"role":"assistant","content":[{"type":"text","text":"Sure, reading the middleware now."}]}}
+{"type":"assistant","timestamp":"2026-06-17T09:00:35Z","cwd":"/work/sameday","message":{"role":"assistant","content":[{"type":"tool_use","name":"Read"}]}}
+{"type":"assistant","timestamp":"2026-06-17T09:04:00Z","cwd":"/work/sameday","message":{"role":"assistant","content":[{"type":"text","text":"Refactored into separate concerns."}]}}
+{"type":"user","timestamp":"2026-06-17T09:05:00Z","cwd":"/work/sameday","message":{"role":"user","content":"looks good, now add tests"}}
+{"type":"assistant","timestamp":"2026-06-17T09:05:20Z","cwd":"/work/sameday","message":{"role":"assistant","content":[{"type":"text","text":"Adding tests for token refresh."}]}}

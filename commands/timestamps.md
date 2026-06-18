@@ -1,7 +1,7 @@
 ---
-description: Display timestamps for messages in the current conversation
-allowed-tools: Bash(python3:*), Bash(ls:*)
-argument-hint: [count]
+description: Display a timestamped timeline of the current conversation
+allowed-tools: Bash(python3:*), Bash(py:*), Bash(python:*)
+argument-hint: [count] [seconds] [tools] | inline on|off
 model: haiku
 ---
 
@@ -12,39 +12,48 @@ model: haiku
 
 ## Task
 
-Display a timestamped timeline of messages from the current conversation transcript.
+Show a timestamped timeline of the current Claude Code session. The parser
+locates the session transcript itself (by matching the recorded working
+directory), so you do **not** need to find or pass any transcript path.
 
-### Step 1: Find the transcript
+### Step 0: Inline-timestamp toggle (only if the first argument is `inline`)
 
-Run this to locate the most recent transcript JSONL file for the current project:
-
-```bash
-PROJECT_KEY=$(pwd | sed 's|/|-|g; s|^|-|')
-ls -t "$HOME/.claude/projects/${PROJECT_KEY}/"*.jsonl 2>/dev/null | head -1
-```
-
-If no file is found, report to the user: "No transcript found for this project directory. This command must be run from a directory with an active Claude Code session."
-
-Do not proceed further if no transcript is found.
-
-### Step 2: Parse and display
-
-Extract the count from `$ARGUMENTS`. If it is a positive integer, use it. Otherwise default to 20. Reject any non-numeric value — do not pass arbitrary strings to the script.
-
-Run the parser script, passing the transcript path and count as arguments:
+If `$ARGUMENTS` begins with the word `inline`, this is a toggle for the
+experimental inline-timestamp feature (a dim `[HH:MM:SS]` shown live on each
+assistant message). Run the toggle script with the rest of the arguments
+(`on`, `off`, `toggle`, or nothing/`status`), show its output, and stop — do
+not render the timeline:
 
 ```bash
-python3 "${CLAUDE_PLUGIN_ROOT}/scripts/parse-transcript.py" "<transcript_path>" "<count>"
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/inline-toggle.py" on
 ```
 
-Replace `<transcript_path>` with the actual path found in step 1, and `<count>` with the validated integer.
+(Use the same Python launcher fallback as Step 2.) Otherwise continue below.
+
+### Step 1: Interpret arguments
+
+Parse `$ARGUMENTS` into options for the parser:
+
+- **count** — the first whole number, if any (e.g. `50`). Otherwise omit it (defaults to 20). Never pass a non-numeric value as the count.
+- **`--seconds`** — add this flag if the arguments contain `seconds` or `sec` (shows `HH:MM:SS`).
+- **`--tools`** — add this flag if the arguments contain `tools` or `tool` (includes tool-call lines, which are hidden by default).
+
+### Step 2: Run the parser
+
+Run the parser, passing `--cwd "$PWD"` plus the options from Step 1. Example for `/timestamps 50 seconds`:
+
+```bash
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/parse-transcript.py" 50 --seconds --cwd "$PWD"
+```
+
+**Python launcher fallback (important for cross-platform use):** run the command with `python3`. If that fails — on Windows `python3` is often a non-functional Microsoft Store stub that prints an install message and exits non-zero — retry the identical command with `py -3`, and if that also fails, with `python`. Use the first launcher that prints a timeline.
 
 ### Step 3: Present output
 
-Display the script output in a code block so columns align. Do not add commentary beyond the timeline.
+Show the parser's output verbatim inside a code block so the columns line up. Do not add commentary beyond the timeline.
 
 ### Constraints
 
-- Never read the transcript with the Read tool — files can be very large.
-- Only pass validated integers as the count argument.
-- Only pass file paths that match the pattern `~/.claude/projects/*/*.jsonl`.
+- Never read the transcript with the Read tool — it can be very large; the parser streams it.
+- Only ever pass a validated whole number as the count.
+- The parser only reads files under `~/.claude/projects/` and sends nothing anywhere.
